@@ -17,10 +17,6 @@ const argv = yargs
   .argv;
 
 // googlekey: AIzaSyAQYvRnQE7A2MYD0jql4XTPIrqAOTIONH0
-var callback = (errorMessage, results) => {
-
-}
-
 geocode.geocodeAddress(argv.address, (errorMessage, results) => {
   if (errorMessage){
     console.log(errorMessage);
