@@ -52,6 +52,14 @@ app.get('/bad', (req, res) => {
     errorMessage: 'Error handling request'
   });
 });
+
+
+app.get('/projects', (req,res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects',
+    githubAccount: 'ArjunBhushan'
+  });
+});
 app.listen(port, () => {
   console.log('Server is up on port 3000');
 });
