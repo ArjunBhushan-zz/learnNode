@@ -12,7 +12,7 @@ MongoClient.connect( 'mongodb://localhost/TodoApp' , (err, client) => {
     const db = client.db('TodoApp');
 
     db.collection('Todo').insertOne({
-      text: 'Unique boi',
+      text: 'Eat lunch',
       completed: false
     }, (err, result) => {
       if (err){

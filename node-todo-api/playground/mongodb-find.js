@@ -21,7 +21,7 @@ MongoClient.connect( 'mongodb://localhost/TodoApp' , (err, client) => {
     //   });
     db.collection('Users').find().count()
       .then((count) => {
-        console.log(`Todos count: ${count}`);
+        console.log(`Users count: ${count}`);
       })
       .catch ((err) => {
         console.log('Unable to fetch todos', err);
@@ -50,9 +50,7 @@ MongoClient.connect( 'mongodb://localhost/TodoApp' , (err, client) => {
     //   }
     // });
 
-    db.collection('Users').find({
-      name: "Arjun"
-    }).toArray()
+    db.collection('Users').find().toArray()
       .then((users) => {
         console.log(JSON.stringify(users, undefined, 2));
       })

@@ -9,20 +9,34 @@ MongoClient.connect( 'mongodb://localhost/TodoApp' , (err, client) => {
     const db = client.db('TodoApp');
 
     //deleteMany
-    var arrayOfDuplicates = [];
+    var objectOfDuplicates = {};
     db.collection('Todo').find().toArray()
       .then((res) => {
         for (var i=0; i<res.length ; i++){
-          if (arrayOfDuplicates[res[i].text]){
-            arrayOfDuplicates[res[i].text].number++;
+          var l = res[i].text;
+          if (objectOfDuplicates.hasOwnProperty(l)){
+            objectOfDuplicates[l] ++;
           }else{
-              arrayOfDuplicates[res[i].text]= {
-                task: res[i].text,
-                number: 1
-              };
+              objectOfDuplicates[l] = 1
+          }
+          if(i === res.length -1) {
+            Object.keys(objectOfDuplicates).forEach(function(key,index) {
+              if(objectOfDuplicates[key] > 1) {
+                db.collection('Todo').deleteMany({text: key})
+                  .then((res) => {
+                    console.log(res.result.n);
+                  })
+                  .catch((err) => {
+                    console.log('There was an error, ', err);
+                  });
+              }
+            });
           }
         }
       })
+      .catch((err) => {
+        console.log('There was an error grabbing all of the duplicates, ' ,err);
+      });
     // db.collection('Todo').deleteMany({text: 'Eat lunch'})
     //   .then((res) => {
     //     console.log(res.result.n);
@@ -39,15 +53,15 @@ MongoClient.connect( 'mongodb://localhost/TodoApp' , (err, client) => {
     //     console.log('There was an error deleting that task ', err);
     //   });
     // findOneAndDelete
-    // db.collection('Todo').findOneAndDelete({
-    //   _id: new ObjectID('5b184a8acbdf0204ca166f46')
-    // })
-    //   .then((res) => {
-    //     console.log(JSON.stringify(res, undefined, 2));
-    //   })
-    //   .catch((err) => {
-    //     console.log('There was an error deleting that task ', err);
-    //   });
+    db.collection('Todo').findOneAndDelete({
+      _id: new ObjectID('5b18907371943500d49bdf23')
+    })
+      .then((res) => {
+        console.log(JSON.stringify(res, undefined, 2));
+      })
+      .catch((err) => {
+        console.log('There was an error deleting that task ', err);
+      });
   }
-  client.close();
+  //client.close();
 });
