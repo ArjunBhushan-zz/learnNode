@@ -3,13 +3,19 @@ const bodyParser= require('body-parser');
 const _ = require('lodash');
 const {mongoose} = require('./db/mongoose');
 const {Todo} = require('./models/todo');
-const {User} = require('./models/todo');
+const {User} = require('./models/user');
 const {ObjectId} = require('mongodb');
 
 var app = express();
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  var time = new Date().toString();
+  console.log(`${req.method} ${req.url} at ${time}`);
+  next();
+});
 
 app.post('/todos', (req,res) => {
   var todo = new Todo ({
@@ -92,13 +98,28 @@ app.patch('/todos/:id', (req,res) =>{
   Todo.findByIdAndUpdate(id, {$set: body}, {new: true})
     .then((todo) => {
       if(!todo){
-        res.send(404).send();
+        res.status(404).send();
         return;
       }
       res.status(200).send({todo});
     })
     .catch((err) => {
       res.status(400).send();
+    });
+});
+
+app.post('/users', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+  var user = new User(body);
+
+  user.save()
+    .then(() => {
+      return user.generateAuthToken();
+    }).then((token) => {
+      res.header('x-auth', token).send(user);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
     });
 });
 
