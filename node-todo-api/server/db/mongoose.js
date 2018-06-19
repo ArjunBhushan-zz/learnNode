@@ -1,4 +1,6 @@
-require('./../config/config');
+if(!process.env.PORT){
+  require('./../config/config');
+}
 var mongoose = require('mongoose');
 console.log(process.env.DB_Host);
 //sudo mongod --storageEngine=mmapv1 --dbpath mongo-local/

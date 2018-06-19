@@ -1,4 +1,6 @@
-require('./../config/config');
+if(!process.env.PORT){
+  require('./../config/config');
+}
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require ('jsonwebtoken');
