@@ -11,6 +11,12 @@ socket.on('newMessage', function(message) {
   console.log('newMessage: ', message);
   var li = jQuery('<li></li>');
   li.text(`${message.from}: ${message.text}`);
+
+  // if(message.from !== 'Admin'){
+  //   var form = jQuery('<form id="edit-form"><input name="edit" type="text" placeholder="Edit" autofocus autocomplete="off"/><button>Edit</button></form>');
+  //   li.append(form);
+  // }
+
   jQuery('#messages').append(li);
 });
 
@@ -38,7 +44,6 @@ jQuery('#message-form').on('submit', function(e){
 
 var locationButton = jQuery('#send-location');
 locationButton.on('click', function() {
-
   if(!navigator.geolocation){
     return alert('Gelocation not support by your browser.');
   }

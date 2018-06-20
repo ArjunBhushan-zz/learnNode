@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="./css/styles.css"/>
   </head>
   <body class="chat">
-
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <div class="chat__sidebar">
       <h3>People</h3>
       <div id="users"></div>
@@ -22,8 +23,6 @@
         </form>
         <button id="send-location">Send location</button>
       </div>
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="/js/libs/jquery-3.3.1.min.js"></script>
       <script src="/js/index.js"></script>
     </div>
   </body>
