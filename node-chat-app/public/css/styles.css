@@ -139,6 +139,12 @@ button:disabled{
 .message__title span{
     color:#999
 }
+
+#rooms ul {
+  text-align: center;
+  list-style-type: none;
+  margin: 1em;
+}
 @media (max-width:600px){
     *{
         font-size:1rem

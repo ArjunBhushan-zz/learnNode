@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body class="centered-form">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/libs/jquery-3.3.1.min.js"></script>
+  <script src="/js/libs/mustache.js"></script>
   <div class="centered-form__form">
     <form action="/chat.html">
       <div class="form-field">
@@ -24,6 +27,9 @@
         <button>Join</button>
       </div>
     </form>
+    <div id="rooms">
+    </div>
   </div>
+  <script src="/js/index.js"></script>
 </body>
 </html>

@@ -13,7 +13,11 @@
 //     return `${this.name} is ${this.age} year(s) old`;
 //   }
 // }
-
+// [{
+//   name: 'deparamed name',
+//   id: 'sockets id',
+//   room: 'deparamed user'
+// }]
 class Users {
   constructor () {
     this.users = [];
@@ -43,6 +47,11 @@ class Users {
       return user.name;
     });
     return namesArray;
+  }
+  getUsersByName(name){
+    return this.users.filter((user) => {
+      return user.name === name;
+    });
   }
 }
 
